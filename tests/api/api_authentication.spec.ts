@@ -111,13 +111,12 @@ test.describe('Auth API - Register & Login', () => {
       
       const errorMessage = responseBody.message || (responseBody.error && responseBody.error.message);
       expect(errorMessage).toBeDefined();
-      expect(errorMessage).toMatch(/Mã xác thực không hợp lệ|invalid|incorrect/i);
+      expect(errorMessage).toMatch(/Mã xác thực không hợp lệ/i);
     });
   });
 
   test.describe('Login API', () => {
     test('Happy Case: Should login successfully with registered phone number', async ({ request }) => {
-      // Create a registered user first
       const { phone, name } = await registerTempUser(request);
 
       const otpResponse = await request.post('/api/proxy/api/auth/otp/send', {
@@ -130,7 +129,6 @@ test.describe('Auth API - Register & Login', () => {
       
       const { requestId } = await otpResponse.json();
 
-      // 2. Call login API
       const loginResponse = await request.post('/api/proxy/api/auth/login', {
         headers: {
           'x-otp-phone': phone,
@@ -188,7 +186,7 @@ test.describe('Auth API - Register & Login', () => {
       
       const errorMessage = responseBody.message || (responseBody.error && responseBody.error.message);
       expect(errorMessage).toBeDefined();
-      expect(errorMessage).toMatch(/Mã xác thực không hợp lệ|invalid|incorrect/i);
+      expect(errorMessage).toMatch(/Mã xác thực không hợp lệ/i);
     });
 
   });
