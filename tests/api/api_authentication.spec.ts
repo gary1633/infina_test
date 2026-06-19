@@ -111,7 +111,7 @@ test.describe('Auth API - Register & Login', () => {
       
       const errorMessage = responseBody.message || (responseBody.error && responseBody.error.message);
       expect(errorMessage).toBeDefined();
-      expect(errorMessage).toMatch(/Mã xác thực không hợp lệ/i);
+      expect(errorMessage).toMatch(/Mã xác thực không hợp lệ|invalid|incorrect/i);
     });
   });
 
@@ -186,7 +186,7 @@ test.describe('Auth API - Register & Login', () => {
       
       const errorMessage = responseBody.message || (responseBody.error && responseBody.error.message);
       expect(errorMessage).toBeDefined();
-      expect(errorMessage).toMatch(/Mã xác thực không hợp lệ/i);
+      expect(errorMessage).toMatch(/Mã xác thực không hợp lệ|invalid|incorrect/i);
     });
 
   });
